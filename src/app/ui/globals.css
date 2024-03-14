@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('swiper/css');
+@import url('swiper/css/navigation');
+@import url('swiper/css/pagination');
+
+
+
+
+
+#middle-swiper .swiper-slide-next {
+  z-index: 3;
+}
+
+
+img, span {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  }
+
+.text-news {
+  background: linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 37.5%, rgba(0, 0, 0, 0.85) 100%);
+}
+
+
+.swiper-pagination-bullet-active {
+  background-color: black;
+}
+
+.news-card {
+  box-shadow: rgba(19, 18, 18, 0.1) 2px 2px 11px !important;
+}
+
+.product-card {
+  box-shadow: 2px 2px 11px hsla(0,3%,7%,.1)!important;
+}
+
+.toaste-notifiction {
+  box-shadow: 0 5px 10px -5px rgba(0, 0, 0, .1);
+}
+
+.wishlist-btn {
+  background: hsla(0,0%,100%,.6);
+    border-radius: 2px!important;
+    box-shadow: 0 4px 6px rgba(0,0,0,.07)!important;
+    color: #003644;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  /* color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb)); */
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+
+.my-shadow {
+ box-shadow:   "0px 2px 4px -1px rgba(0,0,0,0.2),0px 4px 5px 0px rgba(0,0,0,0.14),0px 1px 10px 0px rgba(0,0,0,0.12)",
+}
+
+@keyframes text-highlighter {
+  0% {
+    text-shadow: inherit;
+  }
+  100% {
+    text-shadow: 0 0.1em 50px #00b156, 0.05em -0.03em 15px #00b156,
+      0.05em 0.005em 10px #00b156, 0 0.08em 0 #00b156, 0.05em 0.08em 5px #00b156,
+      0 -0.03em 0 #00b156, -0.03em -0.03em 0 #00b156, -0.03em 0.08em 0 #00b156,
+      -0.03em 0 0 #00b156;
+  }
+}
+
+
+.search-drop {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px -3px, rgba(0, 0, 0, 0.14) 0px 8px 10px 1px, rgba(0, 0, 0, 0.12) 0px 3px 14px 2px;
+}
+
+.mp {
+  cursor: pointer;
+}
+
+.hightLight {
+    animation: text-highlighter 2s infinite alternate-reverse;
+}
+
+.nav-shadow {
+  box-shadow: 1px 1px 10px rgb(0 0 0/15%);
+}
+
+.normal {
+  opacity: 0;
+  display: none;
+  
+  /*  enumarate transitioning properties, including display */
+  transition: opacity 0.5s, display 0.5s allow-discrete;
+}
+
+.show {
+  opacity: 1;        /* Visible */
+  display: block;
+}
+
