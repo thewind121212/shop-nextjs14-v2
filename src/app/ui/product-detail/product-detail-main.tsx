@@ -29,10 +29,9 @@ export default function ProductDetail({
 
   useEffect(() => {
     //retive params from url
-    let colorParam : any = searchParams.get('color')
-    let sizeParam: any = searchParams.get('size')
+    let colorParam : any  = searchParams?.get('color')
+    let sizeParam: any  = searchParams?.get('size')
 
-    console.log(pathname)
 
     if (!sortedColorKey.includes(colorParam) && colorParam !== null) {
        colorParam  = sortedColorKey[0]
@@ -41,11 +40,11 @@ export default function ProductDetail({
       sizeParam = sizes[0]
     } 
     if (colorParam !== null || sizeParam !== null) {
-      router.replace(`${pathname}`)
+      router.push(`${pathname}`, {scroll: false} )
     }
 
     if (colorParam !== null && sizeParam !== null) {
-      router.replace(`${pathname}?color=${colorParam}&size=${sizeParam}`)
+      router.push(`${pathname}?color=${colorParam}&size=${sizeParam}`,{scroll: false})
       setSelectedType({color: colorParam, size: sizeParam})
     }
 
@@ -96,7 +95,7 @@ export default function ProductDetail({
   const selectColorHandler = (color: string) => {
     if (selectedType?.color === color) {
       setSelectedType({ ...selectedType, color: null, size: null });
-      router.push(`${pathname}`)
+      router.push(`${pathname}`, {scroll: false})
       return;
     }
     if (selectedType?.color !== color) {
@@ -106,7 +105,7 @@ export default function ProductDetail({
         size: selectedType?.size ?? null,
       });
       if (selectedType?.size) {
-        router.push(`${pathname}?color=${color}&size=${selectedType?.size}`)
+        router.push(`${pathname}?color=${color}&size=${selectedType?.size}`, {scroll: false})
       }
     }
   };
@@ -114,7 +113,7 @@ export default function ProductDetail({
   const selectSizeHandler = (size: string) => {
     if (selectedType?.size === size) {
       setSelectedType({ ...selectedType, size: null });
-      router.push(`${pathname}`)
+      router.push(`${pathname}`, {scroll: false})
       return;
     }
     setSelectedType({
@@ -123,7 +122,7 @@ export default function ProductDetail({
       color: selectedType?.color !== null ? selectedType?.color ?? null : null,
     });
     if(selectedType?.color) {
-      router.push(`${pathname}?color=${selectedType?.color}&size=${size}`)
+      router.push(`${pathname}?color=${selectedType?.color}&size=${size}`, {scroll: false})
     }
   };
 
@@ -133,7 +132,7 @@ export default function ProductDetail({
         {
           productItem.breadCrum.map((breadCrumb, index) => {
             return (
-              <div key={breadCrumb.link} className="text-[#757575] text-[16px]">
+              <div key={breadCrumb.link} className="text-[#757575] text-[16px] small-screen-400:text-[12px] capitalize">
                 <Link href={ "/category/" +breadCrumb.link}>{breadCrumb.name}</Link>
                 {productItem.breadCrum.length - 1 === index ? null :
                 (<span className="mx-[12px]">/</span>)
@@ -150,7 +149,7 @@ export default function ProductDetail({
           selectedColorIndex={indexColorKey}
           totalSizes={sortedColorKey.length}
         />
-        <div className="flex justify-start items-start h-[600px] flex-col w-[55%] app-c1-max:w-[100%] app-c1-max:px-[10%]">
+        <div className="flex justify-start items-start h-auto flex-col w-[55%] app-c1-max:w-[100%] app-c1-max:px-[3%]">
           <div className="flex justify-left items-center w-full gap-[10px] mb-[12px]">
             {productItem.tags.map((tag, index) => {
               return (

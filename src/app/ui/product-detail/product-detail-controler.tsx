@@ -111,7 +111,7 @@ export default function ProductDetailController({
             <div
               key={colorValue.colorImage + colorkey + productItem.id}
               className={clsx(
-                "color-item w-[45px] app-c1-max:w-[90px] app-c1-max:h-[90px] h-[45px] border-[2px] border-primary-green duration-200",
+                "color-item w-[45px] app-c1-max:w-[90px] app-c1-max:h-auto h-auto border-[2px] mb-[12px] border-primary-green duration-200",
                 {
                   "border-transparent": colorkey !== selectedType?.color,
                 }
@@ -122,7 +122,7 @@ export default function ProductDetailController({
                 src={colorValue.colorImage}
                 width={100}
                 height={45}
-                className="w-auto h-auto"
+                className="w-auto h-auto object-fill"
                 alt="color-image"
               />
             </div>
@@ -149,7 +149,7 @@ export default function ProductDetailController({
           </div>
         ))}
       </div>
-      <div className="aount buy flex justify-start items-center w-full mt-[16px]">
+      <div className="aount buy flex justify-start items-center w-full mt-[16px] gap-[20px] flex-wrap">
         <div className="so luong text-black font-[700px]">Số Lượng</div>
         <div className="controler amount buy flex justify-center items-center h-[35px] ml-[25px]">
           <div
@@ -175,7 +175,7 @@ export default function ProductDetailController({
             <span className="mp user-select-none">+</span>
           </div>
         </div>
-        <div className="ml-[20px]" onClick={() => testing()}>
+        <div className="text-[#0074D9] font-medium" onClick={() => testing()}>
           Số lượng có sẵn {stock}
         </div>
       </div>

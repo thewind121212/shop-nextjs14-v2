@@ -12,11 +12,12 @@ const CategoriesSubMenu = ({ subCategories }: any) =>  {
               <p className="text-primary-green uppercase font-[500]">
                 {subCategory.name}
               </p>
-              {subCategory.detailCategoryItems.map(
-                (subCategoryItem: any) => {
+              {
+                subCategory.detailCategoryItems !== null && subCategory.detailCategoryItems.map(
+                (detailCategoryItem: any) => {
                   return (
-                    <p key={subCategoryItem.slug} className="text-black font-[300]">
-                      {subCategoryItem.name}
+                    <p key={detailCategoryItem.slug} className="text-black font-[300]">
+                      {detailCategoryItem.name}
                     </p>
                   );
                 }

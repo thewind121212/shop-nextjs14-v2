@@ -1,5 +1,5 @@
 import RecentViewedProducts from "@/app/ui/products-mixer/recentViewedProducts";
-import { extractIdFromUrl  } from "@/app/lib/utils/utils";
+import { extractIdFromUrl  } from "@/app/utils/product.utils";
 
 
 export default function ProductDetailLayout({

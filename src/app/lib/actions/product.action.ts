@@ -1,14 +1,15 @@
 import { db } from '../firebase/initFirebase';
-import { collection, getDocs, getDoc, doc, setDoc } from "firebase/firestore";
-import { processDataFetched } from '@/app/utils/product.utils';
+import { collection, getDocs, getDoc, doc } from "firebase/firestore";
+import { processDataFetched} from '@/app/utils/product.utils';
 import { ProductItemType } from '@/app/lib/type';
-import { get } from 'http';
-import { set } from 'firebase/database';
 
+
+const productServiceUrl = process.env.BACKEND_URL;
+const staticURL = process.env.STATIC_IMAGE_SERVER_URL;
 
 //for hot product actions because it using firebase (why not centerlize it because it is a project for learning)
 
-const getAllID = async() => {
+export const getAllID = async() => {
        const popularCollectionRef = collection(db, "popularProduct");
        const IDs: any = [];
        const querySnapshot = await getDocs(popularCollectionRef);
@@ -49,18 +50,31 @@ export const getProductDetailForHotProduct = async (productID: string):Promise<P
 }
 //end of hot product actions
 
-//get product recentviewed
+//get product items from express service
 
-export const getProductsRecentViewed = async (products : string[]) => {
-       const IDs = await getAllID();
-       const promisesFunctions =  products.map((item: string) => {
-              if (IDs.includes(item.toString())) {
-                     return getProductDetailForHotProduct(item.toString())
-              }
-});
-       const fetchedFireBase = await Promise.all(promisesFunctions);
-       const data = processDataFetched(fetchedFireBase)
-       return data;
+export const getProductDetail = async (productID: string):Promise<ProductItemType | null>  => {
+
+       try {
+              const apiURl= (`${productServiceUrl}/product/productdetail?productId=${productID}`)
+              const dateRetrive = await fetch(apiURl)              
+              const {data} : {data : ProductItemType} = await dateRetrive.json();
+              data.thumbnail = `${staticURL}${data.thumbnail}`
+              data.gallery = data.gallery.map((item: string) => {
+                     return `${staticURL}${item}`
+              })
+
+              Object.values(data.color).forEach((item: any) => {
+                     return item.colorImage = `${staticURL}${item.colorImage}`
+              })
+              return  data
+
+       } catch (error) {
+             return null 
+       }
 }
+
+
+
+//get product recentviewedo
 
 

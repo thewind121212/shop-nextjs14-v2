@@ -1,8 +1,8 @@
 import FixUI from "@/app/ui/fix-ui"
-import { getProductDetailForHotProduct } from "@/app/lib/actions/product.action"
+import {getProductDetail } from "@/app/lib/actions/product.action"
 import ProductDetail from "@/app/ui/product-detail/product-detail-main"
 import {ProductItemType} from "@/app/lib/type"
-import { extractIdFromUrl  } from "@/app/lib/utils/utils";
+import { extractIdFromUrl  } from "@/app/utils/product.utils";
 
 
 export default async function Page ({params}: {params: {productItem: string}}) {
@@ -13,16 +13,17 @@ export default async function Page ({params}: {params: {productItem: string}}) {
         throw new Error('ID not found')
     }
 
+    const data : ProductItemType | null = await getProductDetail(productID.toString())
 
 
-    const data : ProductItemType | null  = await getProductDetailForHotProduct(productID.toString())
+    // const data : ProductItemType | null  = await getProductDetailForHotProduct(productID.toString())
     if  (data === null) {
         throw new Error('Product not found')
     }
 
-    if (data.id.toString() !== productID.toString()) {
-        throw new Error('not sync')
-    }
+    // if (data.id.toString() !== productID.toString()) {
+    //     throw new Error('not sync')
+    // }
 
     return (
         <div>

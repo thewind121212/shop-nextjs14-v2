@@ -96,7 +96,7 @@ export default function ProductDetailImage({
                 src={image}
                 width={1200}
                 height={0}
-                className="w-full h-full focus:outline-none"
+                className="w-full h-full focus:outline-none object-contain"
                 style={{ aspectRatio: "1/1" }}
                 alt=""
                 onClick={() => setIsOverlayShow(true)}
@@ -139,7 +139,7 @@ export default function ProductDetailImage({
                   src={image}
                   width={120}
                   height={60}
-                  className="w-full h-auto focus:outline-none"
+                  className="w-full h-auto focus:outline-none object-cover"
                   style={{ aspectRatio: "1/1" }}
                   alt=""
                 />

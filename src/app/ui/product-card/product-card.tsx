@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
-import { removeDiacritics } from "@/app/lib/utils/utils";
+import { removeDiacritics } from "@/app/utils/product.utils";
 import AddCartQuick from "./addCartQuick";
 import WishlistBtn from "./wishlistBtn";
 import Image from "next/image";
@@ -62,7 +62,7 @@ export default function ProductCard({ productItem }: any) {
               item === preview ? "border border-solid border-[#6083ca]" : "";
             return (
               <div
-                className={`${"items-center bg-inherit cursor-pointer flex h-[25px] justify-center w-[25px] rounded-[3px]"} ${isActived}`}
+                className={`${"items-center bg-inherit cursor-pointer flex h-[25px] justify-center w-[25px] overflow-hidden rounded-[3px]"} ${isActived}`}
                 key={index}
                 onClick={() => setPreview(item)}
               >
@@ -71,7 +71,7 @@ export default function ProductCard({ productItem }: any) {
                   alt={item}
                   width={40}
                   height={0}
-                  className="w-full h-auto"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             );

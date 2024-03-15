@@ -31,6 +31,7 @@ const config: Config = {
         'footer-screen2': {'max': '987px'},
         'overlay-screen1': {'min': '993px','max': '1500px'},
         'overlay-screen2': {'max': '600px'},
+        'small-screen-400': {'max': '465px'},
       }
     },
   },

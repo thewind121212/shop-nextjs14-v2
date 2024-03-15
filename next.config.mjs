@@ -6,6 +6,10 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'firebasestorage.googleapis.com'
             },
+            {
+            protocol: 'http',
+            hostname: 'localhost'
+            }
         ],
         minimumCacheTTL: 60 * 60 * 24 * 30,
     },

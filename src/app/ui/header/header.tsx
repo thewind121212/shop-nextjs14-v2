@@ -7,7 +7,6 @@ import { getFullCategories } from "@/app/lib/actions/categories.actions";
 import HamburgerIcon from "./header-interact-component/hamburgerIcon";
 import Link from "next/link";
 import AnnouncementBar from "./announcementbar";
-import { useEffect } from "react";
 
 export default async function Header() {
   const { data } = await getFullCategories();
