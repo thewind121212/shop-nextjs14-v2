@@ -2,6 +2,7 @@ import RecentViewedProducts from "@/app/ui/products-mixer/recentViewedProducts";
 import {getProductDetail, getProductDetailForHotProduct } from "@/app/lib/actions/product.action"
 import {ProductItemType} from "@/app/lib/type"
 import { extractIdFromUrl  } from "@/app/utils/product.utils";
+import { FetchPayload } from "@/app/lib/type";
 import { getAllID } from "@/app/lib/actions/product.action";
 import ProductDetailSection from './page'
 import { processDataFetched } from '@/app/utils/product.utils';
@@ -38,18 +39,20 @@ export default async function ProductDetailLayout({
     }
 
 
-    let idProduct =  {
+    let fetchPayload : FetchPayload =  {
       order: 2,
       breadCrumbArray: data.breadCrum,
+      page: 1,
+      quantity: 12
     }
 
-    const productByCategory = await getProductByCategoryFromBreadCrumb(idProduct)
+    const productByCategory : any = await getProductByCategoryFromBreadCrumb(fetchPayload)
 
-    if (productByCategory === undefined) {
+    if (productByCategory.data === undefined) {
         throw new Error('error in fetch category for product detail') 
     }
 
-    const recommendedProducts : any = processDataFetched(productByCategory).slice(0, 12)
+    const recommendedProducts : any = processDataFetched(productByCategory.data)
 
 
   return (

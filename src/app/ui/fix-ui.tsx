@@ -8,7 +8,6 @@ export default function FixUI() {
 
   useEffect(() => {
     if (window.innerWidth < 877) {
-      // window.scrollTo(0, 0);
     }
     const renderPlaceholder = () => {
       const headerPlaceholder = document.getElementById("header-placeholder");

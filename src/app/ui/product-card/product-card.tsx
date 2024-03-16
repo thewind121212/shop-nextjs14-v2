@@ -9,6 +9,7 @@ import { roboto } from "../font";
 import Link from "next/link";
 
 export default function ProductCard({ productItem }: any) {
+
   const [preview, setPreview] = useState<any>(productItem.thumbnail);
   const timerRef = useRef<any>(null);
 

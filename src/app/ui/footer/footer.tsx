@@ -56,7 +56,7 @@ function Footer() {
           {dummyPolicy.map((item) => (
             <div
               key={item.id}
-              className="w-full h-[71px] flex px-[16px] bg-[#FFF] "
+              className="w-full h-auto flex px-[16px] bg-[#FFF] "
             >
               <div className="basis-2/12 mt-[8px] ml-[8px] bg-[#FFF]">
                 <div className="w-[33px] relative aspect-[1/1]">

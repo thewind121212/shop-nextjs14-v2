@@ -1,5 +1,5 @@
 
-export const buildURLforProductServices = (order: number, breadCrumbArray: any[]) => {
+export const buildURLforProductServices = (order: number | "all", breadCrumbArray: any[]) => {
     let url = null
         url =  `${process.env.BACKEND_URL}/categories${breadCrumbArray[1].link}`
     if (order === 2) {

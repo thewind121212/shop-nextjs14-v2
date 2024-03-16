@@ -23,3 +23,10 @@ export type ProductItemType = {
     tags: string[],
     sold: number,
 }
+
+export type FetchPayload = {
+    order: number | "all",
+    breadCrumbArray: any[],
+    page: number,
+    quantity: number
+}
