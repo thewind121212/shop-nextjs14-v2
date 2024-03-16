@@ -2,7 +2,7 @@
 
 //react error page
 
-export default function Error() {
+export default function ErrorBoundary() {
     return (
         <div className="w-[100vw] h-[100vh] flex justify-center items-center">
             <h1>404 - Page Not Found</h1>

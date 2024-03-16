@@ -55,7 +55,7 @@ export default function ProductDetail({
     );
     const newViewedProducts = [...viewedProducts];
     if (!newViewedProducts.includes(productItem.id)) {
-      if (newViewedProducts.length === 8) {
+      if (newViewedProducts.length === 9) {
         newViewedProducts.pop();
         newViewedProducts.unshift(productItem.id);
       } else {
