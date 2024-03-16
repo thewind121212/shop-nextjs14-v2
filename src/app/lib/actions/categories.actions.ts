@@ -1,3 +1,4 @@
+import { buildURLforProductServices} from '@/app/utils/category.uitls';
 
 const backendUrl = process.env.BACKEND_URL
 
@@ -13,8 +14,8 @@ export const getFullCategories = async () => {
 }
 
 
-export const fetchAllImages = async () => {
+export const getProductByCategoryFromBreadCrumb = async ({order , breadCrumbArray} : any) => {
+    const urlForFetch = buildURLforProductServices(3, breadCrumbArray)
+    console.log(urlForFetch)
 }
 
-
-fetchAllImages()

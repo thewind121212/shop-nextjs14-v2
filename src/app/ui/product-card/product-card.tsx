@@ -48,10 +48,11 @@ export default function ProductCard({ productItem }: any) {
 
         <Link href={`${productUrl}`} className="mp">
           <Image
-            className="w-full h-auto duration-300 group-hover:scale-[1.15]"
+            className="w-full h-auto duration-300 group-hover:scale-[1.15] object-cover"
             width={300}
             height={0}
             src={preview}
+            style={{aspectRatio: "1/1", objectPosition: "top"}}
             alt="product-card-image"
           />
         </Link>

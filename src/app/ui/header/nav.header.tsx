@@ -3,6 +3,7 @@ import clsx from "clsx";
 import { useState, useRef, use, useEffect } from "react";
 import DesktopCategoriesMenu from "../categories-menu/desktop/desktop-categories-menu";
 import MobileCategoriesNav from "../categories-menu/mobile/mobile-categories-menu";
+import Link from "next/link";
 const dummyNavLink = [
   { name: "New arrivals", link: "/new-arrivals" },
   { name: "SẢN PHẨM", link: "/category" },
@@ -54,7 +55,8 @@ export default function Nav({ categories }: any) {
           );
         }
         return (
-          <div
+          <Link
+            href={link.link === "/new-arrivals" ? "/category" : link.link}
             key={link.link}
             className="group flex justify-center items-center h-[77px] px-[10px] relative cursor-pointer"
           >
@@ -66,7 +68,7 @@ export default function Nav({ categories }: any) {
             >
               {link.name}
             </div>
-          </div>
+          </Link>
         );
       })}
     </ul>
