@@ -15,7 +15,7 @@ const nextConfig = {
             hostname: '10.10.0.217'
             }
         ],
-        minimumCacheTTL: 60 * 60 * 24 * 30,
+        minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
     },
 };
 
