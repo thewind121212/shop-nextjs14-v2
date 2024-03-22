@@ -133,6 +133,8 @@ body {
   background: #ededed;
 }
 
+
+
 .skeleton::before {
   content: "";
   position: absolute;

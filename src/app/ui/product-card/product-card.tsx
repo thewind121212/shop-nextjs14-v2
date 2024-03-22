@@ -45,7 +45,7 @@ export default function ProductCard({ productItem }: any) {
               className="w-full h-auto hidden duration-300 group-hover:scale-[1.15]"
               width={272}
               height="0"
-              onLoadingComplete={() => setImageLoadingState("done")}
+              onLoad={() => setImageLoadingState("done")}
               onError={() => setImageLoadingState("error")}
               src="/icons/noun-no-image.svg"
               alt="product-card-image"
@@ -61,7 +61,7 @@ export default function ProductCard({ productItem }: any) {
               height={0}
               src={preview}
               style={{ aspectRatio: "1/1", objectPosition: "top" }}
-              onLoadingComplete={() => setImageLoadingState("done")}
+              onLoad={() => setImageLoadingState("done")}
               onError={() => setImageLoadingState("error")}
               alt="product-card-image"
             />
@@ -85,7 +85,7 @@ export default function ProductCard({ productItem }: any) {
                   src={item}
                   alt={item}
                   width={40}
-                  onLoadingComplete={() => setImageLoadingState("done")}
+                  onLoad={() => setImageLoadingState("done")}
                   onError={() => setImageLoadingState("error")}
                   height={40}
                   className="w-auto h-auto object-contain"
