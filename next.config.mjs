@@ -9,6 +9,10 @@ const nextConfig = {
             {
             protocol: 'http',
             hostname: 'localhost'
+            },
+            {
+            protocol: 'http',
+            hostname: '10.10.0.217'
             }
         ],
         minimumCacheTTL: 60 * 60 * 24 * 30,
