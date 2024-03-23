@@ -1,12 +1,11 @@
 "use client";
-import { useState, useRef, useEffect, use } from "react";
-import Image from "next/image";
+import { useState, useRef, useEffect } from "react";
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { useDebouncedCallback } from "use-debounce";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ProductDetailSocialShare from "../social-share/productDetail-social";
+import { BigDetailImge, ImageSlider } from "./image-loader";
 
-import clsx from "clsx";
 import ProductDetailOverlay from "./product-detail-overlay";
 
 export default function ProductDetailImage({
@@ -20,9 +19,6 @@ export default function ProductDetailImage({
 }) {
   const [selectedImage, setSelectedImage] = useState<number>(0);
   const [isOverlayShow, setIsOverlayShow] = useState<boolean>(false);
-  const [imageLoadingState, setImageLoadingState] = useState<
-    "loading" | "done" | "error"
-  >("loading");
   const offset = (100 * selectedImage).toString();
   const SwipeRef = useRef<any>(null);
   const watchingImage = useRef<number>(0);
@@ -82,7 +78,10 @@ export default function ProductDetailImage({
           closeOverlay={() => setIsOverlayShow(false)}
         />
       )}
-      <div className="preview h-auto w-full overflow-hidden relative focus:outline-none" style={{aspectRatio: "1/1"}}>
+      <div
+        className="preview h-auto w-full overflow-hidden relative focus:outline-none"
+        style={{ aspectRatio: "1/1" }}
+      >
         <div
           className="absolute left-[10px] bg-[#0000004d] flex justify-center top-[50%] translate-y-[-50%] items-center  w-[30px] h-[30px] text-[#fff] z-30 mp text-[14px] focus:outline-none"
           onClick={() => handleImageSelect("prev")}
@@ -95,17 +94,7 @@ export default function ProductDetailImage({
         >
           {galleryImages.map((image) => {
             return (
-              <Image
-                key={image}
-                src={image}
-                width={1200}
-                height={0}
-                className="w-full h-full focus:outline-none object-contain"
-                onLoad={() => setImageLoadingState("done")}
-                style={{ aspectRatio: "1/1" }}
-                alt=""
-                onClick={() => setIsOverlayShow(true)}
-              />
+              <BigDetailImge key={image} image={image} setIsOverlayShow={setIsOverlayShow} />
             );
           })}
         </div>
@@ -115,9 +104,6 @@ export default function ProductDetailImage({
         >
           <FaArrowRight className="w-[29px]" />
         </div>
-      {imageLoadingState === "loading" && (
-        <div className="absolute w-full h-full top-0 left-0  z-[30] skeleton"  style={{aspectRatio: "1/1"}}/>
-      )}
       </div>
       <div className="gallery mt-[7px] w-full h-auto">
         <Swiper
@@ -135,23 +121,9 @@ export default function ProductDetailImage({
         >
           {galleryImages.map((image, index) => {
             return (
-              <SwiperSlide
-                key={image}
-                className={clsx("border-[2px]", {
-                  "border-primary-green": selectedImage === index,
-                  "border-transparent": selectedImage !== index,
-                })}
-                onClick={() => setSelectedImage(index)}
-              >
-                <Image
-                  src={image}
-                  width={120}
-                  height={60}
-                  className="w-full h-auto focus:outline-none object-cover"
-                  style={{ aspectRatio: "1/1" }}
-                  alt=""
-                />
-              </SwiperSlide>
+              <SwiperSlide key={image}>
+                  <ImageSlider  image={image} index={index} setSelectedImage={setSelectedImage} selectedImage={selectedImage} />
+               </SwiperSlide> 
             );
           })}
         </Swiper>

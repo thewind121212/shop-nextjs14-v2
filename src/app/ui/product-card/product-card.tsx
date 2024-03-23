@@ -8,12 +8,12 @@ import clsx from "clsx";
 import { roboto } from "../font";
 import Link from "next/link";
 import ErrorImage from "../shared/error-image";
-import Loading from "@/app/loading";
+import { SmallImageCard } from "./card-image";
 
 export default function ProductCard({ productItem }: any) {
   const [preview, setPreview] = useState<any>(productItem.thumbnail);
   const [imageLoadingState, setImageLoadingState] = useState<
-    "loading" | "done" | "error"
+    "loading" | "done" | "error" | "loadingManually"
   >("loading");
   const timerRef = useRef<any>(null);
 
@@ -27,8 +27,13 @@ export default function ProductCard({ productItem }: any) {
     clearTimeout(timerRef.current);
   };
 
-  const nameUrl = removeDiacritics(productItem.name);
+  const handerSetPreview = (item: any) => {
+    if (item === preview) return;
+    setPreview(item);
+    setImageLoadingState("loadingManually");
+  }
 
+  const nameUrl = removeDiacritics(productItem.name);
   const productUrl = `/product/${nameUrl}-i.${productItem.id}`;
 
   return (
@@ -38,25 +43,10 @@ export default function ProductCard({ productItem }: any) {
       onMouseOver={clearRevertPreview}
     >
       <div className="w-full relative overflow-hidden">
-        {productItem.colorArray.map((item: any, index: number) => (
-          <Link href={`${productUrl}`} className="mp" key={index + item[index]}>
-            <Image
-              key={index + item[index]}
-              className="w-full h-auto hidden duration-300 group-hover:scale-[1.15]"
-              width={272}
-              height="0"
-              onLoad={() => setImageLoadingState("done")}
-              onError={() => setImageLoadingState("error")}
-              src="/icons/noun-no-image.svg"
-              alt="product-card-image"
-            />
-          </Link>
-        ))}
-
         <Link href={`${productUrl}`} className="mp">
           {imageLoadingState !== "error" ? (
             <Image
-              className="w-full h-auto duration-300 group-hover:scale-[1.15] object-cover"
+              className="w-full h-auto duration-500 group-hover:scale-[1.15] object-cover"
               width={300}
               height={0}
               src={preview}
@@ -75,30 +65,12 @@ export default function ProductCard({ productItem }: any) {
             const isActived =
               item === preview ? "border border-solid border-[#6083ca]" : "";
             return (
-              <div
-                className={`${"items-center bg-inherit cursor-pointer flex h-[25px] justify-center w-[25px] overflow-hidden rounded-[3px]"} ${isActived}`}
-                key={index}
-                onClick={() => setPreview(item)}
-              >
-          {imageLoadingState !== "error" ? (
-                <Image
-                  src={item}
-                  alt={item}
-                  width={40}
-                  onLoad={() => setImageLoadingState("done")}
-                  onError={() => setImageLoadingState("error")}
-                  height={40}
-                  className="w-auto h-auto object-contain"
-                />
-          ) : (
-            <ErrorImage className="w-full h-auto duration-300 group-hover:scale-[1.15] object-cover" />
-          )}
-              </div>
+              <SmallImageCard key={index} item={item} setPreview={handerSetPreview} isActived={isActived} />
             );
           })}
         </div>
 
-        {imageLoadingState === "loading" && (
+        {(imageLoadingState === "loading" || imageLoadingState === "loadingManually")   && (
           <div className="absolute w-full top-0 left-0  h-full z-[30] skeleton" />
         )}
       </div>
