@@ -79,3 +79,38 @@ export function ImageSlider({
     </div>
   );
 }
+
+export function SizeImge ({colorValue, colorkey,  productItem, selectedType, selectColorHandler, } : any) {
+
+  const [imageLoadingState, setImageLoadingState] = useState<'loading' | 'done' | 'error'>('loading')
+
+  return (
+            <div
+              className={clsx(
+                "color-item w-[45px] app-c1-max:w-[90px] app-c1-max:h-auto h-auto min-h-[45px] max-h-auto border-[2px] mb-[12px] border-primary-green duration-200 relative",
+                {
+                  "border-transparent": colorkey !== selectedType?.color,
+                }
+              )}
+              onClick={() => selectColorHandler(colorkey)}
+            >
+              <Image
+                src={colorValue.colorImage}
+                width={100}
+                height={45}
+                onLoad={() => setImageLoadingState("done")}
+                onError={() => setImageLoadingState("error")}
+                className="w-auto h-auto object-fill"
+                alt="color-image"
+              />
+
+        {
+          imageLoadingState === "loading" && (
+            <div
+              className="absolute w-full h-full top-0 left-0  z-[30] skeleton"
+            />
+          )
+        }
+            </div>
+  )
+}

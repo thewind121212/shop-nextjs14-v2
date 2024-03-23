@@ -15,10 +15,11 @@ export const getFullCategories = async () => {
 }
 
 
-export const getProductByCategoryFromBreadCrumb = async ({ order, breadCrumbArray, page, quantity }: FetchPayload) => {
+export const getProductByCategoryFromBreadCrumb = async ({ order, breadCrumbArray, page, quantity, sortBy }: FetchPayload) => {
 
     const pageFetch = page === 0 ? '' : `page=${page}`
     const quantityFetch = quantity === 0 ? '' : `&quantity=${quantity}`
+    const sortByFetch  = !sortBy || sortBy === 'default' ? '':`&sortBy=${sortBy}`
 
 
     let urlForFetch = null
@@ -34,10 +35,8 @@ export const getProductByCategoryFromBreadCrumb = async ({ order, breadCrumbArra
     }
 
 
-    const urlFull = `${urlForFetch}?${pageFetch}${quantityFetch}`
-    console.log(urlFull)
 
-    const dataFetch = await fetch(urlForFetch + "?" + pageFetch + quantityFetch, { cache: 'no-cache' })
+    const dataFetch = await fetch(urlForFetch + "?" + pageFetch + quantityFetch + sortByFetch, { cache: 'no-cache' })
 
     try {
         if (dataFetch.ok) {

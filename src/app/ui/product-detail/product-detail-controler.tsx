@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import Image from "next/image";
+import { SizeImge } from "./image-loader";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { useAppDispatch } from "@/app/lib/redux/hooks";
@@ -38,7 +38,11 @@ export default function ProductDetailController({
   }, [stock]);
 
   const stockHandler = (value: any) => {
-    if (selectedType?.size !== null && selectedType?.color !== null && selectedType !== null) {
+    if (
+      selectedType?.size !== null &&
+      selectedType?.color !== null &&
+      selectedType !== null
+    ) {
       dispatch(
         pushNotification({
           msgId: "product-detail-controller-stockMax",
@@ -104,28 +108,18 @@ export default function ProductDetailController({
   return (
     <>
       <div className="w-full mt-[1rem] mb-[10px]">Màu sắc</div>
-      <div className="color flex justify-start items-center gap-[16px] w-full">
+      <div className="color flex justify-start items-center gap-[16px] w-full min-h-[45px] relative">
         {sortedColorKey.map((colorkey) => {
           const colorValue = productItem.color[colorkey];
           return (
-            <div
+            <SizeImge
               key={colorValue.colorImage + colorkey + productItem.id}
-              className={clsx(
-                "color-item w-[45px] app-c1-max:w-[90px] app-c1-max:h-auto h-auto border-[2px] mb-[12px] border-primary-green duration-200",
-                {
-                  "border-transparent": colorkey !== selectedType?.color,
-                }
-              )}
-              onClick={() => selectColorHandler(colorkey)}
-            >
-              <Image
-                src={colorValue.colorImage}
-                width={100}
-                height={45}
-                className="w-auto h-auto object-fill"
-                alt="color-image"
-              />
-            </div>
+              productItem={productItem}
+              colorValue={colorValue}
+              colorkey={colorkey}
+              selectColorHandler={selectColorHandler}
+              selectedType={selectedType}
+            />
           );
         })}
       </div>

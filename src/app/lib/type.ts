@@ -29,4 +29,5 @@ export type FetchPayload = {
     breadCrumbArray: any[],
     page: number,
     quantity: number
+    sortBy?: string
 }
